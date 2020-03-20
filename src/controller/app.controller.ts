@@ -1,20 +1,32 @@
-import { Controller, Get, Post, Req, HttpCode, Param } from '@nestjs/common';
+import { Controller, Get, Param, Req, Post, Body, HttpCode } from '@nestjs/common';
 import { AppService } from '../app.service';
 import { IAccountInfo } from 'src/models/IAccountInfo';
+import { Request } from 'express';
+import { AccountModel } from 'src/models/accountModel';
+import { ApiParam, ApiTags } from '@nestjs/swagger';
 
 @Controller("account")
-export class AppController {
+@ApiTags("Account")
+export class AppController{
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  get():IAccountInfo[] {
-    return this.appService.getHello();
+ async  get():Promise<IAccountInfo[]> {
+    return await this.appService.getHello();
   }
 
   
   @Get(':name')
-  getbyName(@Param() params):IAccountInfo[] {
+  getbyName(@Param() params, @Req() request: Request):IAccountInfo[] {
+    console.log(request.url)
     return params.name;
   }
+
+  @Post()
+  @HttpCode(201)
+  create(@Body() createAccountInfoDto: AccountModel):AccountModel {
+  this.appService.create(createAccountInfoDto);
+  return  createAccountInfoDto
+}
 
 }
