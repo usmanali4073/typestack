@@ -2,7 +2,7 @@ import { Controller, Get, Param, Req, Post, Body, HttpCode } from '@nestjs/commo
 import { AppService } from '../app.service';
 import { IAccountInfo } from 'src/models/IAccountInfo';
 import { Request } from 'express';
-import { AccountModel } from 'src/models/accountModel';
+import { AccountModel } from '../models/AccountModel';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
 
 @Controller("account")

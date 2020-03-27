@@ -1,6 +1,6 @@
 import { IAccountInfo } from './models/IAccountInfo';
 import { Injectable, Scope } from '@nestjs/common';
-import { AccountModel } from './models/accountModel';
+import { AccountModel } from './models/AccountModel';
 
 @Injectable({scope: Scope.REQUEST})
 export class AppService {
